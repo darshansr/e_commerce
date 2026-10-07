@@ -1,0 +1,35 @@
+{
+  "name": "@meghana/server",
+  "version": "1.0.0",
+  "private": true,
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "dev:worker": "tsx watch src/worker.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "start:worker": "node dist/worker.js",
+    "db:generate": "echo \"TODO: vendure migrations - see PROGRESS.md\" && exit 1",
+    "db:migrate": "echo \"TODO: vendure migrate - see PROGRESS.md\" && exit 1",
+    "db:seed": "tsx scripts/seed.ts",
+    "db:seed:covers": "tsx scripts/seed-covers.ts",
+    "search:reindex": "tsx scripts/reindex.ts",
+    "graphql:schema": "tsx scripts/generate-schema.ts",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@vendure/asset-server-plugin": "catalog:",
+    "@vendure/core": "catalog:",
+    "dotenv": "catalog:",
+    "graphql": "catalog:",
+    "pg": "catalog:",
+    "reflect-metadata": "catalog:",
+    "typeorm": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "sharp": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:"
+  }
+}

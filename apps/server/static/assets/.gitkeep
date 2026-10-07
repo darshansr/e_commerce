@@ -1,0 +1,2 @@
+# Keeps this directory in git. Product images are written here at runtime by
+# AssetServerPlugin and can be regenerated with `db:seed:covers` — see .gitignore.

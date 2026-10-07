@@ -1,0 +1,40 @@
+{
+  "name": "meghana-pos",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "build:server": "turbo run build --filter=@meghana/server",
+    "build:storefront": "turbo run build --filter=@meghana/storefront",
+    "build:pos": "turbo run build --filter=@meghana/pos-pwa",
+    "build:b2b": "turbo run build --filter=@meghana/b2b-portal",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "test:unit": "turbo run test:unit",
+    "test:e2e": "turbo run test:e2e",
+    "db:generate": "turbo run db:generate --filter=@meghana/server",
+    "db:migrate": "turbo run db:migrate --filter=@meghana/server",
+    "db:seed": "turbo run db:seed --filter=@meghana/server",
+    "graphql:generate": "turbo run graphql:generate",
+    "docker:build": "docker-compose -f infrastructure/docker/docker-compose.yml build",
+    "docker:up": "docker-compose -f infrastructure/docker/docker-compose.yml up -d",
+    "docker:down": "docker-compose -f infrastructure/docker/docker-compose.yml down",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "format": "prettier --write \"**/*.{ts,tsx,json,md}\""
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0",
+    "prettier": "^3.3.0",
+    "typescript": "^5.5.0",
+    "@types/node": "^22.0.0"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "packageManager": "pnpm@9.15.0"
+}

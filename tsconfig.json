@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022"],
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@meghana/shared/*": ["packages/shared/*"],
+      "@meghana/config/*": ["packages/config/*"],
+      "@meghana/server/*": ["apps/server/src/*"],
+      "@meghana/storefront/*": ["apps/storefront/src/*"],
+      "@meghana/pos/*": ["apps/pos-pwa/src/*"],
+      "@meghana/b2b/*": ["apps/b2b-portal/src/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist", "build", ".next", ".turbo"]
+}

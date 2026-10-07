@@ -1,0 +1,26 @@
+{
+  "name": "@meghana/shared-graphql-operations",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "build": "tsc --noEmit",
+    "dev": "tsc --noEmit --watch",
+    "graphql:generate": "gql.tada generate-output --tsconfig ./tsconfig.json",
+    "graphql:check": "gql.tada check --tsconfig ./tsconfig.json",
+    "lint": "eslint src --ext .ts",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "gql.tada": "catalog:",
+    "graphql": "catalog:"
+  },
+  "devDependencies": {
+    "typescript": "catalog:",
+    "@types/node": "catalog:"
+  }
+}

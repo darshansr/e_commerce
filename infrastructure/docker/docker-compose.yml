@@ -1,0 +1,73 @@
+# Meghana Book House - local development infrastructure
+#
+# Usage (from the repo root):
+#   pnpm docker:up      -> docker compose -f infrastructure/docker/docker-compose.yml up -d
+#   pnpm docker:down    -> docker compose -f infrastructure/docker/docker-compose.yml down
+#
+# Credentials here are LOCAL DEVELOPMENT ONLY and intentionally weak.
+
+name: meghana-pos
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: meghana-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: meghana
+      POSTGRES_PASSWORD: meghana
+      POSTGRES_DB: meghana_pos
+      # Deterministic collation so index ordering matches across machines.
+      POSTGRES_INITDB_ARGS: '--encoding=UTF8 --locale=C'
+    ports:
+      # NOTE: host port is 5433, not 5432, because a locally-installed Postgres
+      # already listens on 127.0.0.1:5432 and shadows this container for
+      # `localhost` connections. Keep DB_PORT in sync with this value.
+      - '5433:5432'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U meghana -d meghana_pos']
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+  redis:
+    image: redis:7-alpine
+    container_name: meghana-redis
+    restart: unless-stopped
+    command: ['redis-server', '--appendonly', 'yes']
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 3s
+      retries: 12
+
+  meilisearch:
+    image: getmeili/meilisearch:v1.10
+    container_name: meghana-meilisearch
+    restart: unless-stopped
+    environment:
+      MEILI_MASTER_KEY: dev_master_key_change_me
+      MEILI_ENV: development
+      MEILI_NO_ANALYTICS: 'true'
+    ports:
+      - '7700:7700'
+    volumes:
+      - meilisearch-data:/meili_data
+    healthcheck:
+      test: ['CMD', 'curl', '-fsS', 'http://localhost:7700/health']
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 15s
+
+volumes:
+  postgres-data:
+  redis-data:
+  meilisearch-data:

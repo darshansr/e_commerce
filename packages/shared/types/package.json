@@ -1,0 +1,29 @@
+{
+  "name": "@meghana/shared-types",
+  "version": "1.0.0",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./product": "./dist/product.js",
+    "./cart": "./dist/cart.js",
+    "./customer": "./dist/customer.js",
+    "./order": "./dist/order.js",
+    "./pos": "./dist/pos.js",
+    "./b2b": "./dist/b2b.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint src --ext .ts",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "typescript": "catalog:",
+    "@types/node": "catalog:"
+  }
+}

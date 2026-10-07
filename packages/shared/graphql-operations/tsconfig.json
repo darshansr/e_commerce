@@ -1,0 +1,29 @@
+{
+  "extends": "../../../tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2022"],
+    "types": ["node"],
+    "plugins": [
+      {
+        "name": "gql.tada/ts-plugin",
+        "schemas": [
+          {
+            "name": "shop",
+            "schema": "../../../apps/server/src/schema-shop.graphql",
+            "tadaOutputLocation": "./src/gql.tada.ts"
+          },
+          {
+            "name": "admin",
+            "schema": "../../../apps/server/src/schema-admin.graphql",
+            "tadaOutputLocation": "./src/gql.tada.admin.ts"
+          }
+        ]
+      }
+    ]
+  },
+  "include": ["src/**/*", "gql.tada.ts", "gql.tada.admin.ts"],
+  "exclude": ["node_modules", "dist"]
+}
